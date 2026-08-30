@@ -1,81 +1,100 @@
 "use client";
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-interface DropdownContextValue {
+interface DropdownMenuContextValue {
   open: boolean;
-  toggle: () => void;
-  close: () => void;
+  setOpen: (open: boolean) => void;
 }
 
-const DropdownContext = React.createContext<DropdownContextValue | null>(null);
+const DropdownMenuContext = React.createContext<DropdownMenuContextValue | null>(null);
 
 export function DropdownMenu({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
-    <DropdownContext.Provider value={{ open, toggle: () => setOpen(!open), close: () => setOpen(false) }}>
-      <div className="relative inline-block text-left" ref={ref}>
-        {children}
-      </div>
-    </DropdownContext.Provider>
+    <DropdownMenuContext.Provider value={{ open, setOpen }}>
+      <div className="relative inline-block">{children}</div>
+    </DropdownMenuContext.Provider>
   );
 }
 
-export function DropdownMenuTrigger({ children, asChild, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }) {
-  const context = React.useContext(DropdownContext);
+export function DropdownMenuTrigger({
+  asChild,
+  children,
+  ...props
+}: {
+  asChild?: boolean;
+  children: React.ReactNode;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  const context = React.useContext(DropdownMenuContext);
   if (!context) throw new Error("DropdownMenuTrigger must be used within DropdownMenu");
-  
+
+  const handleClick = () => context.setOpen(!context.open);
+
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children as React.ReactElement<any>, {
-      onClick: context.toggle,
+    return React.cloneElement(children, {
+      onClick: handleClick,
       ...props,
-    });
+    } as React.HTMLAttributes<HTMLElement>);
   }
 
   return (
-    <button type="button" onClick={context.toggle} {...props}>
+    <button type="button" onClick={handleClick} {...props}>
       {children}
     </button>
   );
 }
 
-export function DropdownMenuContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  const context = React.useContext(DropdownContext);
-  if (!context || !context.open) return null;
+export function DropdownMenuContent({
+  className,
+  align = "start",
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & { align?: "start" | "end" | "center" }) {
+  const context = React.useContext(DropdownMenuContext);
+  if (!context) throw new Error("DropdownMenuContent must be used within DropdownMenu");
+  if (!context.open) return null;
 
   return (
-    <div
-      className={cn(
-        "absolute right-0 z-50 mt-2 min-w-[8rem] overflow-hidden rounded-md border border-border bg-surface p-1 shadow-md animate-in fade-in-0 zoom-in-95",
-        className
-      )}
-      {...props}
-    />
+    <>
+      <div className="fixed inset-0 z-40" onClick={() => context.setOpen(false)} />
+      <div
+        className={cn(
+          "absolute z-50 mt-1 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-surface p-1 shadow-lg",
+          align === "start" && "left-0",
+          align === "end" && "right-0",
+          align === "center" && "left-1/2 -translate-x-1/2",
+          className
+        )}
+        onClick={(e) => e.stopPropagation()}
+        {...props}
+      >
+        {children}
+      </div>
+    </>
   );
 }
 
-export function DropdownMenuItem({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  const context = React.useContext(DropdownContext);
+export function DropdownMenuItem({
+  className,
+  children,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  const context = React.useContext(DropdownMenuContext);
+  if (!context) throw new Error("DropdownMenuItem must be used within DropdownMenu");
+
   return (
-    <div
+    <button
+      type="button"
       className={cn(
-        "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-muted focus:bg-muted focus:text-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted focus:bg-muted focus:outline-none",
         className
       )}
-      onClick={context?.close}
+      onClick={() => context.setOpen(false)}
       {...props}
-    />
+    >
+      {children}
+    </button>
   );
 }

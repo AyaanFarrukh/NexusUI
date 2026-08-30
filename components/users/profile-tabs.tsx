@@ -2,7 +2,6 @@
 
 import { Activity, Briefcase, CreditCard, FileText, Settings as SettingsIcon } from "lucide-react";
 
-import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,8 +10,7 @@ import { Select } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/lib/hooks/use-toast";
-import { projectStatusMeta } from "@/lib/project-meta";
-import { formatDate } from "@/lib/project-meta";
+import { projectStatusMeta, formatDate } from "@/lib/project-meta";
 import type { UserProfile } from "@/data/user-profile";
 
 function OverviewTab({ profile }: { profile: UserProfile }) {
@@ -286,7 +284,7 @@ function SettingsTab({ profile }: { profile: UserProfile }) {
           <CardDescription>Manage password and two-factor authentication.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Button variant="outline" onClick={() => toast({ title: "Password reset", description: "Reset link sent to the user's email." })}>
+          <Button variant="outline" onClick={() => toast({ title: "Password reset", description: "Reset link sent to the user&apos;s email." })}>
             Send password reset
           </Button>
           <div className="flex items-center justify-between border-t border-border pt-4">

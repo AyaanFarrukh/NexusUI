@@ -1,52 +1,51 @@
-"use client";
-import * as React from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-interface AvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
-  src?: string | null;
-  alt?: string;
-  fallback?: string;
+interface AvatarProps {
+  src?: string;
+  fallback: string;
   size?: "sm" | "md" | "lg" | "xl";
+  className?: string;
 }
 
-const SIZE_CLASSES = {
+const sizeClasses = {
   sm: "size-8 text-xs",
   md: "size-10 text-sm",
   lg: "size-12 text-base",
   xl: "size-16 text-lg",
 };
 
-export function Avatar({ src, alt, fallback, size = "md", className, ...props }: AvatarProps) {
-  const [error, setError] = React.useState(false);
-
+export function Avatar({ src, fallback, size = "md", className }: AvatarProps) {
   const initials = fallback
-    ? fallback
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2)
-    : "?";
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
+  if (src) {
+    return (
+      <div className={cn("relative overflow-hidden rounded-full bg-muted", sizeClasses[size], className)}>
+        <Image
+          src={src}
+          alt={fallback}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </div>
+    );
+  }
 
   return (
-    <span
+    <div
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted font-medium text-muted-foreground",
-        SIZE_CLASSES[size],
+        "grid place-items-center rounded-full bg-accent-subtle font-medium text-accent-subtle-fg",
+        sizeClasses[size],
         className
       )}
-      {...props}
     >
-      {src && !error ? (
-        <img
-          src={src}
-          alt={alt || ""}
-          onError={() => setError(true)}
-          className="aspect-square h-full w-full object-cover"
-        />
-      ) : (
-        <span aria-hidden="true">{initials}</span>
-      )}
-    </span>
+      {initials}
+    </div>
   );
 }

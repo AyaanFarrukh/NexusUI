@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Check } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -12,8 +11,10 @@ export interface CheckboxProps
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, label, id, onCheckedChange, onChange, ...props }, ref) => {
-    const inputId = id || React.useId();
+  ({ label, id, onCheckedChange, onChange, ...props }, ref) => {
+    // Always call useId unconditionally, then use it as fallback if no id provided
+    const generatedId = React.useId();
+    const inputId = id || generatedId;
 
     return (
       <div className="flex items-center gap-2">
