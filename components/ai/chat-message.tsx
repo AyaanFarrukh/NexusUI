@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Bot, Check, Copy, RefreshCw, User } from "lucide-react";
 
-import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/types/ai";

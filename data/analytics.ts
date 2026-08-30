@@ -70,3 +70,20 @@ export const revenueByCategoryData = [
   { name: "Consulting Services", value: 19800 },
   { name: "Add-ons", value: 15200 },
 ];
+
+export const analyticsData: Record<string, { name: string; revenue: number; users: number }[]> = {
+  "12m": [
+    { name: "Apr", revenue: 42500, users: 8420 },
+    { name: "May", revenue: 48300, users: 9130 },
+    { name: "Jun", revenue: 51200, users: 9680 },
+    { name: "Jul", revenue: 46800, users: 9240 },
+    { name: "Aug", revenue: 53400, users: 10120 },
+    { name: "Sep", revenue: 57100, users: 10870 },
+    { name: "Oct", revenue: 54200, users: 10430 },
+    { name: "Nov", revenue: 59800, users: 11290 },
+    { name: "Dec", revenue: 64500, users: 11950 },
+    { name: "Jan", revenue: 61200, users: 11520 },
+    { name: "Feb", revenue: 67800, users: 12340 },
+    { name: "Mar", revenue: 72400, users: 13180 },
+  ],
+};

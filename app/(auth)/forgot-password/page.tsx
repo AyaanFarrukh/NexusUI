@@ -34,13 +34,13 @@ export default function ForgotPasswordPage() {
       <Card className="w-full max-w-md min-w-0">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Check your email</CardTitle>
-          <CardDescription>
-            We've sent password reset instructions to <strong className="text-foreground">{email}</strong>
+           <CardDescription>
+            We&apos;ve sent password reset instructions to <strong className="text-foreground">{email}</strong>
           </CardDescription>
         </CardHeader>
         <CardContent className="text-center">
-          <p className="text-sm text-muted-foreground">
-            If you don't see the email, check your spam folder or{" "}
+            <p className="text-sm text-muted-foreground">
+            If you don&apos;t see the email, check your spam folder or{" "}
             <button onClick={() => setSent(false)} className="text-accent hover:underline">
               try again
             </button>
@@ -62,7 +62,7 @@ export default function ForgotPasswordPage() {
     <Card className="w-full max-w-md min-w-0">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">Forgot password?</CardTitle>
-        <CardDescription>No worries, we'll send you reset instructions</CardDescription>
+          <CardDescription>No worries, we&apos;ll send you reset instructions</CardDescription>
       </CardHeader>
 
       <CardContent>

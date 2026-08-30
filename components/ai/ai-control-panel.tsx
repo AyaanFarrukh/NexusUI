@@ -122,7 +122,7 @@ export function AIControlPanel({ settings, onSettingsChange, usage }: AIControlP
 
           <p className="text-xs leading-relaxed text-muted-foreground">
             Usage is estimated locally (≈ 4 characters per token) and resets when the page reloads.
-            Wire this panel to your provider's usage API for real numbers.
+            Wire this panel to your provider&apos;s usage API for real numbers.
           </p>
         </TabsContent>
       </Tabs>
