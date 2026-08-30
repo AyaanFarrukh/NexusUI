@@ -8,7 +8,12 @@ import { useNotifications } from "@/components/notifications/notifications-provi
 import { IconButton } from "@/components/ui/icon-button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -91,7 +96,10 @@ export function Header({ collapsed, setCollapsed, setMobileOpen }: HeaderProps) 
               </span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-48">
+
+          {/* FIX: align="end" pins the menu to the right edge of the avatar
+              so it opens inward and never overflows on small screens */}
+          <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem className="text-danger-fg">Log out</DropdownMenuItem>
