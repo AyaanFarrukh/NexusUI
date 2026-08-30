@@ -31,7 +31,7 @@ export const kpiData = [
     comparison: "from last month",
     icon: "Activity",
   },
-];
+] as const;
 
 export const analyticsData = {
   "7d": [
