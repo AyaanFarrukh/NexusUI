@@ -121,7 +121,7 @@ export function IntegrationsView() {
                   <span className="text-xs text-muted-foreground">{item.category}</span>
                   <Button
                     size="sm"
-                    variant={item.connected ? "outline" : "default"}
+                    variant={item.connected ? "outline" : "primary"}
                     onClick={() => toggle(item.id)}
                   >
                     {item.connected ? "Disconnect" : "Connect"}
