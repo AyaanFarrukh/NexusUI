@@ -3,7 +3,7 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 interface HorizontalBarChartProps {
-  data: Record<string, any>[];
+  data: Record<string, string | number>[];
   dataKey: string;
   nameKey: string;
   color?: string;

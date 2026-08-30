@@ -241,7 +241,7 @@ export function DeveloperView() {
           <DialogHeader>
             <DialogTitle>Your new API key</DialogTitle>
             <DialogDescription>
-              Copy it now — for security, you won't be able to see the full key again.
+               Copy it now — for security, you won&apos;t be able to see the full key again.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">

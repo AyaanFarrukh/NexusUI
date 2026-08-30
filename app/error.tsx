@@ -16,9 +16,7 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log to your error reporting service (Sentry, LogRocket, etc.)
-    // eslint-disable-next-line no-console
+    useEffect(() => {
     console.error("Runtime error caught by error boundary:", error);
   }, [error]);
 

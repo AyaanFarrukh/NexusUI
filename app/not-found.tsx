@@ -25,7 +25,7 @@ export default function NotFound() {
             <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground">404</h1>
             <h2 className="mt-2 text-lg font-semibold text-foreground">Page not found</h2>
             <p className="mx-auto mt-3 max-w-sm text-sm text-muted-foreground">
-              The page you're looking for doesn't exist, may have been moved, or the URL is incorrect.
+               The page you&apos;re looking for doesn&apos;t exist, may have been moved, or the URL is incorrect.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <Link href="/">

@@ -3,7 +3,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 interface SimpleLineChartProps {
-  data: Record<string, any>[];
+  data: Record<string, string | number>[];
   dataKey: string;
   xKey: string;
   color?: string;

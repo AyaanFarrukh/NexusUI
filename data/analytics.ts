@@ -63,3 +63,10 @@ export const performanceMetrics = [
   { label: "Page Views", value: "124.5K", trend: "+8.4%", direction: "up" as const },
   { label: "New Users", value: "45.2K", trend: "+12.1%", direction: "up" as const },
 ];
+
+export const revenueByCategoryData = [
+  { name: "SaaS Subscriptions", value: 42500 },
+  { name: "Enterprise Licenses", value: 28300 },
+  { name: "Consulting Services", value: 19800 },
+  { name: "Add-ons", value: 15200 },
+];

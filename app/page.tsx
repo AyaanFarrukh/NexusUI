@@ -162,7 +162,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="neutral" className="mb-4">Pages</Badge>
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Every page you'll ever need
+               Every page you&apos;ll ever need
             </h2>
             <p className="mt-3 text-muted-foreground">
               Fully interactive — try each one in the live demo.
