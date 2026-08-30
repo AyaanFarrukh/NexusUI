@@ -12,7 +12,9 @@ export interface SwitchProps
 
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   ({ className, label, id, onCheckedChange, onChange, ...props }, ref) => {
-    const inputId = id || React.useId();
+    // Always call useId unconditionally, then use it as fallback if no id provided
+    const generatedId = React.useId();
+    const inputId = id || generatedId;
 
     return (
       <div className="flex items-center gap-2">

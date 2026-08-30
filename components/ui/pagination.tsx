@@ -1,29 +1,40 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Button, type ButtonProps } from "./button";
 
-export function Pagination({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
+export function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
-    <nav role="navigation" aria-label="pagination" className={cn("mx-auto flex w-full justify-center", className)} {...props} />
+    <nav
+      role="navigation"
+      aria-label="pagination"
+      className={cn("mx-auto flex w-full justify-center", className)}
+      {...props}
+    />
   );
 }
 
-export function PaginationContent({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) {
+export function PaginationContent({ className, ...props }: React.ComponentProps<"ul">) {
   return <ul className={cn("flex flex-row items-center gap-1", className)} {...props} />;
 }
 
-export function PaginationItem({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) {
+export function PaginationItem({ className, ...props }: React.ComponentProps<"li">) {
   return <li className={cn("", className)} {...props} />;
 }
 
-export function PaginationLink({ className, isActive, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { isActive?: boolean }) {
+type PaginationLinkProps = {
+  isActive?: boolean;
+} & Pick<React.ComponentProps<typeof Link>, "href"> &
+  React.ComponentProps<"a">;
+
+export function PaginationLink({ className, isActive, href, ...props }: PaginationLinkProps) {
   return (
-    <a
+    <Link
+      href={href}
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "inline-flex size-9 items-center justify-center rounded-md text-sm transition-colors hover:bg-muted",
-        isActive ? "bg-accent text-accent-fg hover:bg-accent" : "text-muted-foreground",
+        "focus-ring flex size-9 items-center justify-center rounded-md text-sm font-medium transition-colors",
+        isActive ? "bg-accent text-accent-fg" : "text-muted-foreground hover:bg-muted",
         className
       )}
       {...props}
@@ -31,27 +42,39 @@ export function PaginationLink({ className, isActive, ...props }: React.AnchorHT
   );
 }
 
-export function PaginationPrevious({ className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+export function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <a aria-label="Go to previous page" className={cn("inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground", className)} {...props}>
+    <PaginationLink
+      aria-label="Go to previous page"
+      className={cn("gap-1 pl-2.5", className)}
+      {...props}
+    >
       <ChevronLeft className="size-4" />
       <span>Previous</span>
-    </a>
+    </PaginationLink>
   );
 }
 
-export function PaginationNext({ className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+export function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <a aria-label="Go to next page" className={cn("inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground", className)} {...props}>
+    <PaginationLink
+      aria-label="Go to next page"
+      className={cn("gap-1 pr-2.5", className)}
+      {...props}
+    >
       <span>Next</span>
       <ChevronRight className="size-4" />
-    </a>
+    </PaginationLink>
   );
 }
 
-export function PaginationEllipsis({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span">) {
   return (
-    <span aria-hidden className={cn("flex size-9 items-center justify-center", className)} {...props}>
+    <span
+      aria-hidden
+      className={cn("flex size-9 items-center justify-center", className)}
+      {...props}
+    >
       <MoreHorizontal className="size-4" />
       <span className="sr-only">More pages</span>
     </span>
